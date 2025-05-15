@@ -11,7 +11,7 @@ import {
     ConfirmDialog,
     DataTable, Dialog,
     DialogService, FileUpload, FloatLabel, IconField, InputIcon, InputNumber, InputText, Menu, Rating,
-    Row, Tag, Textarea, Toast,
+    Row, Select, Tag, Textarea, Toast,
     ToastService, Toolbar
 } from "primevue";
 import router from "./router/index.js";
@@ -47,4 +47,5 @@ createApp(App)
     .component('pv-float-label', FloatLabel)
     .component('pv-checkbox', Checkbox)
     .component('pv-rating', Rating)
+    .component('pv-select',Select)
     .mount('#app')

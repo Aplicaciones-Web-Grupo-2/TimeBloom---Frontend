@@ -2,10 +2,11 @@
 import {Task} from "../model/task.entity.js";
 import {TasksApiService} from "../services/tasks-api.service.js";
 import DataManager from "../../shared/components/data-manager.component.vue";
+import TaskCreateAndEdit from "../components/task-create-and-edit.component.vue";
 
 export default {
   name: "task-management",
-  components: {DataManager},
+  components: {TaskCreateAndEdit, DataManager},
   data(){
     return {
       title: {singular: 'Task', plural: 'Tasks'},
@@ -78,9 +79,12 @@ export default {
     onSavedEventHandler(item){
       this.submitted = true;
       if(this.task.title.trim()){
-        if(item.id){
+        if(this.isEdit){
+          console.log("estoy en update",item);
+          console.log(this.task.title);
           this.updateTask();
         } else {
+          console.log("estoy en crear",item);
           this.createTask();
         }
       }
@@ -90,8 +94,8 @@ export default {
     },
 
     createTask(){
-      this.task.id=0;
       this.task = Task.fromDisplayableTask(this.task);
+      this.task.user_id = 2;
       this.taskService.create(this.task).
           then((response) => {
             this.task = Task.toDisplayableTask(response.data);
@@ -102,9 +106,10 @@ export default {
 
     updateTask(){
       this.task = Task.fromDisplayableTask(this.task);
-      this.taskService.update(this.task).
+      this.taskService.update(this.task.id,this.task).
           then((response) => {
             this.tasks[this.findIndexById(response.data.id)] = Task.toDisplayableTask(response.data);
+            console.log(this.tasks[this.findIndexById(response.data.id)]);
             this.notifySuccessfulAction("Task Updated");
       });
     },
@@ -160,6 +165,15 @@ export default {
       </template>
 
     </data-manager>
+
+    <task-create-and-edit
+    :statuses="statuses"
+    :item="task"
+    :edit="isEdit"
+    :visible="isVisible"
+    v-on:canceled="onCanceledEventHandler"
+    v-on:task_saved="onSavedEventHandler($event)"
+    />
 
 
 

@@ -17,7 +17,7 @@
   ],
   "tasks": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Estudiar matemáticas",
       "description": "Revisar álgebra y geometría para el examen",
       "priority": "ALTA",
@@ -28,7 +28,7 @@
       "user_id": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Lavar los platos",
       "description": "Después del almuerzo",
       "priority": "MEDIA",
@@ -39,7 +39,7 @@
       "user_id": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Comprar útiles",
       "description": "Cuadernos y lápices para el colegio",
       "priority": "BAJA",
@@ -50,7 +50,7 @@
       "user_id": 1
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Preparar presentación",
       "description": "PowerPoint para exposición de historia",
       "priority": "ALTA",
@@ -61,7 +61,7 @@
       "user_id": 1
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Barrer la casa",
       "description": "Limpiar sala y cocina",
       "priority": "MEDIA",
@@ -72,7 +72,7 @@
       "user_id": 1
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Leer capítulo del libro",
       "description": "Capítulo 4 de 'Cien años de soledad'",
       "priority": "MEDIA",
@@ -83,7 +83,7 @@
       "user_id": 2
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "Lavar ropa",
       "description": "Usar ciclo rápido",
       "priority": "BAJA",
@@ -94,7 +94,7 @@
       "user_id": 2
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "Pagar recibo de luz",
       "description": "Antes de la fecha límite",
       "priority": "ALTA",
@@ -105,7 +105,7 @@
       "user_id": 2
     },
     {
-      "id": 9,
+      "id": "9",
       "title": "Revisar apuntes",
       "description": "Biología molecular",
       "priority": "ALTA",
@@ -116,7 +116,7 @@
       "user_id": 2
     },
     {
-      "id": 10,
+      "id": "10",
       "title": "Organizar el escritorio",
       "description": "Limpiar y archivar documentos",
       "priority": "MEDIA",
