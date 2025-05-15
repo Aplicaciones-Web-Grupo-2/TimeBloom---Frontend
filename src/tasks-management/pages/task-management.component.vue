@@ -25,7 +25,7 @@ export default {
     this.taskService.getAll().then(response => {
       console.log(response.data);
       let tasks = response.data;
-      this.task = tasks.map((t) => Task.toDisplayableTask(t));
+      this.tasks = tasks.map((t) => Task.toDisplayableTask(t));
     });
 
   },
