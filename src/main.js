@@ -1,35 +1,35 @@
 import { createApp } from 'vue';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
-
 import 'primeicons/primeicons.css'
 
 import './style.css'
 import App from './app.vue'
 import {
-    Button, Card, Checkbox,
+    Button, Drawer, Card, Checkbox,
     Column,
     ConfirmationService,
     ConfirmDialog,
     DataTable, Dialog,
     DialogService, FileUpload, FloatLabel, IconField, InputIcon, InputNumber, InputText, Menu, Rating,
     Row, Select, Tag, Textarea, Toast,
-    ToastService, Toolbar
+    ToastService, Toolbar, StyleClass, Ripple
 } from "primevue";
 import router from "./router/index.js";
 
 createApp(App)
     .use(PrimeVue, {
+        ripple: true,
         theme: {
             preset: Aura
         }
     })
     .use(router)
-    .use(PrimeVue, {ripple: true})
     .use(ToastService)
     .use(DialogService)
     .use(ConfirmationService)
     .component('pv-button', Button)
+    .component('pv-drawer', Drawer)
     .component('pv-data-table', DataTable)
     .component('pv-column', Column)
     .component('pv-confirm-dialog', ConfirmDialog)
@@ -50,4 +50,6 @@ createApp(App)
     .component('pv-checkbox', Checkbox)
     .component('pv-rating', Rating)
     .component('pv-select',Select)
+    .directive('styleclass', StyleClass)
+    .directive('ripple', Ripple)
     .mount('#app')

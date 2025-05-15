@@ -9,9 +9,9 @@ export default{
     return{
       drawer: false,
       items: [
-        { label: 'Home', to: '/home'},
-        { label: 'Tutorials', to: '/tutorials' },
-        { label: 'About', to: '/about'}
+        { label: 'User-Panel', to: '/home' },
+        { label: 'Tasks', to: '/tasks' },
+        { label: 'Pomodoro', to: '/pomodoro' }
       ]
     }
   },
@@ -33,19 +33,27 @@ export default{
       <template #start>
         <pv-button class="p-button-text text-white" icon="pi pi-bars" @click="toggleDrawer"/>
         <h1>TimeBloom</h1>
-        <div class="flex-column">
-          <router-link v-for="item in items" :key="item.label" v-slot="{navigate, href}" :to="item.to" custom>
-            <pv-button :href="href" class="p-button-text text-white" @click="navigate">{{item.label}}</pv-button>
-          </router-link>
-        </div>
       </template>
       <template #end>
       </template>
     </pv-toolbar>
 
-<task-management></task-management>
-
   </header>
+
+  <pv-drawer v-model:visible="drawer" header="Menú">
+    <ul class="list-none p-0 m-0">
+      <li v-for="item in items" :key="item.label" class="mb-2">
+        <router-link :to="item.to" @click="drawer = false">
+          <pv-button class="w-full justify-start" severity="secondary" :label="item.label" icon="pi pi-chevron-right" />
+        </router-link>
+      </li>
+    </ul>
+  </pv-drawer>
+
+  <main class="p-4">
+    <router-view />
+  </main>
+
 </template>
 
 <style scoped>
