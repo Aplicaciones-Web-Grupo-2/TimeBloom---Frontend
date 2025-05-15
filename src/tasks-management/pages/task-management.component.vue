@@ -36,13 +36,16 @@ export default {
       this.$toast.add({severity: "success", summary: "Success", detail: message, life: 3000,});
     },
     // Get the severity color according to status
-    getSeverity(status) {
-      switch (status) {
-        case 'Published': return 'success';
-        case 'Unpublished': return 'info';
-        default:  return null;
+    getStatusSeverity(status) {
+      switch (status.toUpperCase()) {
+        case 'PENDIENTE': return 'danger';
+        case 'EN PROGRESO': return 'info';
+        case 'COMPLETADA': return 'success';
+        default: return null;
       }
-    },
+    }
+
+    ,
     findIndexById(id) {
       return this.tasks.findIndex((task) => task.id === id);
     },
@@ -155,13 +158,17 @@ export default {
         <pv-column :sortable="true" field="title"       header="Title"        style="min-width: 16rem"/>
         <pv-column :sortable="true" field="description" header="Description"  style="min-width: 16rem"/>
         <pv-column :sortable="true" field="priority"      header="Priority"       style="min-width: 16rem"/>
-        <pv-column :sortable="true" field="status"      header="Status"       style="min-width: 16rem"/>
+        <pv-column :sortable="true" field="category"      header="Category"       style="min-width: 16rem"/>
         <pv-column :sortable="true" field="due_date"      header="Due_date"       style="min-width: 16rem"/>
-        <pv-column :sortable="true" field="category"      header="Category"       style="min-width: 16rem">
+        <pv-column :sortable="true" field="status" header="Status" style="min-width: 16rem">
           <template #body="slotProps">
-            <pv-tag :severity="getSeverity(slotProps.data.status)" :value="slotProps.data.status"/>
+            <pv-tag
+                :value="slotProps.data.status"
+                :severity="getStatusSeverity(slotProps.data.status)"
+            />
           </template>
         </pv-column>
+
       </template>
 
     </data-manager>

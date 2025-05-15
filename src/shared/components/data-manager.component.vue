@@ -97,7 +97,7 @@ export default {
     <pv-column v-if="dynamic" v-for="column in columns" :key="column.field" :field="column.field" :header="column.header"/>
     <pv-column :exportable="false" style="min-width:8rem">
       <template #body="slotProps">
-        <pv-button icon="pi pi-pencil" outlined rounded class="mr-2" @click="editItem(slotProps.data)"/>
+        <pv-button icon="pi pi-pencil" outlined rounded class="mr-2 " @click="editItem(slotProps.data)"/>
         <pv-button icon="pi pi-trash" outlined rounded severity="danger" @click="confirmDeleteItem(slotProps.data)"/>
       </template>
     </pv-column>
