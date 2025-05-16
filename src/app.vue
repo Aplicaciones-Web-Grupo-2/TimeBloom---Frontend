@@ -59,4 +59,26 @@ export default{
 
 <style scoped>
 
+*{
+  outline: none;
+}
+
+.list-none{
+  list-style:none;
+  margin: 0;
+  padding: 0;
+}
+
+.list-none li{
+  margin: 0px;
+}
+
+.list-none button{
+  margin: 10px 0;
+}
+
+.list-none button:hover{
+  background-color: #34d399;
+}
+
 </style>
