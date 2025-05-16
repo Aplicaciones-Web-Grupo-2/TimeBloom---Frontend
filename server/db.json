@@ -126,5 +126,34 @@
       "category": "TAREAS DOMESTICAS",
       "user_id": 2
     }
+  ],
+  "metas": [
+    {
+      "id": "1",
+      "title": "Leer 2 libros al mes",
+      "category": "Crecimiento Personal",
+      "status": "pendiente",
+      "priority": "alta"
+    },
+    {
+      "id": "2",
+      "title": "Hacer ejercicio 3 veces por semana",
+      "category": "Salud",
+      "status": "en_progreso",
+      "priority": "media"
+    },
+    {
+      "id": "3",
+      "title": "Reducir el uso del celular",
+      "category": "Productividad",
+      "status": "pendiente"
+    },
+    {
+      "id": "4",
+      "title": "Dormir al menos 7 horas por día",
+      "category": "Salud Mental",
+      "status": "completada",
+      "priority": "baja"
+    }
   ]
 }
