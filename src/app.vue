@@ -11,7 +11,8 @@ export default{
       items: [
         { label: 'User-Panel', to: '/home' },
         { label: 'Tasks', to: '/tasks' },
-        { label: 'Pomodoro', to: '/pomodoro' }
+        { label: 'Pomodoro', to: '/pomodoro' },
+        { label: 'Advices', to: 'advices'}
       ]
     }
   },
