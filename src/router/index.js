@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Login from "../auth/login.component.vue";
 import Register from "../auth/register.component.vue";
 import userPanelComponent from "../public/user-panel.component.vue";
@@ -26,10 +26,9 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(), 
   routes
-});
-
+})
 // guard para proteger rutas privadas
 router.beforeEach((to, from, next) => {
   const publicPages = ["/login", "/register"];
