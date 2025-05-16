@@ -82,7 +82,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 .drawer {
   width: 250px;
