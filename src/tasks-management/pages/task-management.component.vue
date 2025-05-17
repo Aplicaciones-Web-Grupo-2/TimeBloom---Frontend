@@ -196,7 +196,12 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-
+@media (min-width: 1024px) {
+  .tutorials {
+    height: calc(100vh - 150px); /* Ajusta según tu toolbar */
+    overflow-y: auto;
+  }
+}
 @media screen and (max-width: 960px) {
   :deep(.p-toolbar) {
     flex-wrap: wrap;
@@ -204,11 +209,4 @@ export default {
   }
 }
 
-@media (min-width: 1024px) {
-  .tutorials {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
 </style>
