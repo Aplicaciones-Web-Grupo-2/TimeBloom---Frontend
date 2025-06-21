@@ -67,7 +67,8 @@ export default {
         { label: 'User-Panel', to: '/home' },
         { label: 'Tasks', to: '/tasks' },
         { label: 'Pomodoro', to: '/pomodoro' },
-        { label: 'Advices', to: '/advices' }
+        { label: 'Advices', to: '/advices' },
+        { label: 'Misión del Día', to: '/daily-missions' }
       ]
     }
   },
