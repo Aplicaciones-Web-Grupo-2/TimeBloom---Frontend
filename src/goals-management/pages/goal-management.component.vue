@@ -1,162 +1,134 @@
 <script>
-import DataManager from '../../shared/components/data-manager.component.vue';
-import GoalItemCreateAndEditDialog from '../components/goal-item-create-and-edit.component.vue';
-import {Goal} from '../model/goal.entity.js';
-import {GoalService} from '../services/goal.service.js';
+import {Goal} from "../model/goal.entity.js";
+import {GoalApiService} from "../services/goal-api.service.js";
+import DataManager from "../../shared/components/data-manager.component.vue";
+import GoalItemCreateAndEditDialog from "../components/goal-item-create-and-edit.component.vue";
 
 export default {
   name: "goal-management",
-  components: {DataManager, GoalItemCreateAndEditDialog},
+  components: {GoalItemCreateAndEditDialog, DataManager},
   data() {
     return {
-      title: {singular: 'goal', plural: 'goals'},
+      title: {singular: 'Goal', plural: 'Goals'},
       goals: [],
-      goal: new Goal({}),
+      goal: {},
       selectedGoals: [],
       goalService: null,
-      createAndEditDialogIsVisible: false,
+      isVisible: false,
       isEdit: false,
-      submitted: false,
-    }
-  },
-  methods: {
-    onNewItem() {
-      this.goal = new Goal({});
-      this.isEdit = false;
-      this.submitted = false;
-      this.createAndEditDialogIsVisible = true;
-      console.log("Se aperturo del Dialog Create");
-    },
-    onEditItem(item)
-    {
-      this.goal = new Goal(item);
-      this.isEdit = true;
-      this.submitted = false;
-      this.createAndEditDialogIsVisible = true;
-    },
-    onDeleteItem(item)
-    {
-      console.log("onDeleteItem");
-
-      this.goal = {...item};
-      console.log(this.goal);
-      this.deleteGoal();
-    },
-    deleteGoal() {
-      console.log("delete goal");
-      this.goalService.delete(this.goal.id).then(() => {
-        console.log("antes de buscando el index");
-
-        let index = this.findIndexById(this.goal.id);
-        console.log("buscando el index");
-        this.goals.splice(index, 1);
-        this.notifySuccessfulAction("Goal Deleted");
-
-      }).catch(error => console.error(error));
-    },
-    onDeleteSelectedItems(selectedItems)
-    {
-      console.log("onDeleteSelectedItems");
-      this.selectedGoals = selectedItems;
-      this.deleteSelectedGoals();
-    },
-    deleteSelectedGoals()
-    {
-      this.selectedGoals.forEach((goal) => {
-        this.goalService.delete(goal.id).then(() => {
-          this.goals = this.goals.filter((t) => t.id !== this.goal.id);
-        });
-      });
-      this.notifySuccessfulAction("Goals Deleted");
-    },
-    onCancelRequested()
-    {
-      this.createAndEditDialogIsVisible = false;
-      this.submitted = false;
-      this.isEdit = false;
-    },
-    onSaveRequested(item)
-    {
-      console.log("onSaveRequested todo casi bien");
-      this.submitted = true;
-      console.log(" onSaveRequested antes del if");
-      if (this.goal.name.trim()) {
-        console.log(" onSaveRequested antes del segundo if");
-        //  console.log(item);
-        if (item.id)
-        { console.log("En el update");
-          this.updateGoal();
-        }
-        else
-        {
-          console.log("En el create");
-          this.createGoal();
-        }
-        this.createAndEditDialogIsVisible = false;
-        this.isEdit = false;
-      }
-    },
-    findIndexById(id) {
-      return this.goals.findIndex( goal => goal.id === id);
-    },
-    createGoal() {
-      this.goalService.create(this.goal).then(response =>{
-            let goal = new Goal(response.data)
-            console.log(goal);
-            this.goals.push(goal);
-            this.notifySuccessfulAction("Goal Created");
-          }
-      ).catch(error => console.error(error));
-
-    },
-    notifySuccessfulAction(message){
-      this.$toast.add({severity:'success', summary: 'Success', detail: message, life: 3000});
-    },
-    updateGoal() {
-      this.goalService.update(this.goal.id, this.goal).then( response =>{
-        let index = this.findIndexById(this.goal.id);
-        this.goals[index] = new Goal(response.data);
-        this.notifySuccessfulAction("Goal Updated");
-      }).catch(error => console.error(error));
+      submitted: false
     }
   },
   created() {
-    this.goalService = new GoalService();
+    console.log('Componente goal-management montado');
+    this.goalService = new GoalApiService();
     this.goalService.getAll().then(response => {
-      this.goals = response.data.map(goal => new Goal(goal));
-      console.log(this.goals);
-    }).catch(error => console.error(error));
-    console.log("obtuvo las metas");
-    console.log(this.goals);
+      let goals = response.data;
+      this.goals = goals.map((g) => Goal.toDisplayableGoal ? Goal.toDisplayableGoal(g) : g);
+      console.log('GOALS CARGADAS:', this.goals); // Depuración
+    });
   },
+  methods: {
+    notifySuccessfulAction(message){
+      this.$toast.add({severity: "success", summary: "Success", detail: message, life: 3000,});
+    },
+    findIndexById(id) {
+      return this.goals.findIndex((goal) => goal.id === id);
+    },
+    onNewItemEventHandler(){
+      this.goal = {};
+      this.submitted = false;
+      this.isEdit = false;
+      this.isVisible = true;
+    },
+    onEditItemEventHandler(item){
+      this.goal = item;
+      this.submitted = false;
+      this.isEdit = true;
+      this.isVisible = true;
+    },
+    onDeleteItemEventHandler(item){
+      this.goal = item;
+      this.deleteGoal();
+    },
+    onDeleteSelectedItemsEventHandler(selectedItems){
+      this.selectedGoals = selectedItems;
+      this.deleteSelectedGoals();
+    },
+    onCanceledEventHandler(){
+      this.isVisible = false;
+      this.submitted = false;
+      this.isEdit = false;
+    },
+    onSavedEventHandler(item){
+      this.submitted = true;
+      if(this.goal.title && this.goal.title.trim()){
+        if(this.isEdit){
+          this.updateGoal();
+        } else {
+          this.createGoal();
+        }
+      }
+      this.isVisible = false;
+      this.isEdit = false;
+    },
+    createGoal(){
+      this.goal = Goal.fromDisplayableGoal ? Goal.fromDisplayableGoal(this.goal) : this.goal;
+      this.goalService.create(this.goal).
+          then((response) => {
+            this.goal = Goal.toDisplayableGoal ? Goal.toDisplayableGoal(response.data) : response.data;
+            this.goals.push(this.goal);
+            this.notifySuccessfulAction("Goal Created");
+      } );
+    },
+    updateGoal(){
+      this.goal = Goal.fromDisplayableGoal ? Goal.fromDisplayableGoal(this.goal) : this.goal;
+      this.goalService.update(this.goal.id,this.goal).
+          then((response) => {
+            this.goals[this.findIndexById(response.data.id)] = Goal.toDisplayableGoal ? Goal.toDisplayableGoal(response.data) : response.data;
+            this.notifySuccessfulAction("Goal Updated");
+      });
+    },
+    deleteGoal(){
+      this.goalService.delete(this.goal.id).
+          then(()=>{
+            this.goals = this.goals.filter((g)=> g.id !== this.goal.id);
+            this.goal = {};
+            this.notifySuccessfulAction("Goal Deleted");
+      })
+    },
+    deleteSelectedGoals(){
+      this.selectedGoals.forEach((g) => {
+        this.goalService.delete(g.id).then(()=>{
+          this.goals = this.goals.filter((g1)=> g1.id !== g.id);
+        });
+      });
+      this.notifySuccessfulAction("Goal Deleted");
+    },
+  }
 }
 </script>
+
 <template>
-  <div class="w-full">
-    <data-manager :title=title
-                  :items="goals"
-                  @new-item-requested="onNewItem"
-                  @edit-item-requested="onEditItem($event)"
-                  @delete-item-requested="onDeleteItem($event)"
-                  @delete-selected-items-requested="onDeleteSelectedItems($event)">
-      <template #custom-columns>
-        <pv-column :sortable="true" field="id" header="Id" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="title" header="Title" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="category" header="Category" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="status" header="Status" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="priority" header="Priority" style="min-width: 24rem"/>
-      </template>
-    </data-manager>
-
+  <div>
+    <h2>¡Componente de metas montado!</h2>
+    <data-manager
+      :items="goals"
+      :selected-items.sync="selectedGoals"
+      :title="title"
+      @edit-item="onEditItemEventHandler"
+      @delete-item="onDeleteItemEventHandler"
+      @delete-selected-items="onDeleteSelectedItemsEventHandler"
+      @new-item="onNewItemEventHandler"
+    />
     <goal-item-create-and-edit-dialog
-        :edit="isEdit"
-        :item="goal"
-        :visible="createAndEditDialogIsVisible"
-        @cancel-requested="onCancelRequested"
-        @save-requested="onSaveRequested($event)">
-
-    </goal-item-create-and-edit-dialog>
-
+      :visible="isVisible"
+      :item="goal"
+      @save-requested="onSavedEventHandler"
+      @cancel-requested="onCanceledEventHandler"
+    />
   </div>
-
 </template>
+
+<style scoped>
+</style>
