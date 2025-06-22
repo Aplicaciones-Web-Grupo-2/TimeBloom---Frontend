@@ -39,8 +39,8 @@ export default {
 </script>
 <template>
   <create-and-edit :entity="item" :visible="visible" entity-name="Goal"
-                   @save-action-requested="onSaveRequested"
-                   @cancel-action-requested="onCancelRequested">
+                   @saved="onSaveRequested"
+                   @canceled="onCancelRequested">
     <template #content>
       <div class="p-fluid">
         <div class="field mt-5">
@@ -67,7 +67,6 @@ export default {
         </div>
       </div>
     </template>
-
   </create-and-edit>
 </template>
 <style scoped></style>

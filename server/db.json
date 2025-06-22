@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "juan@example.com",
       "password": "123456",
       "name": "Juan Pérez",
       "language": "es"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "maria@example.com",
       "password": "abcdef",
       "name": "María López",
@@ -72,17 +72,6 @@
       "user_id": 1
     },
     {
-      "id": "6",
-      "title": "Leer capítulo del libro",
-      "description": "Capítulo 4 de 'Cien años de soledad'",
-      "priority": "MEDIA",
-      "status": "PENDIENTE",
-      "due_date": "2025-05-16",
-      "reminder_time": "2025-05-16T18:00:00",
-      "category": "ESTUDIO",
-      "user_id": 2
-    },
-    {
       "id": "7",
       "title": "Lavar ropa",
       "description": "Usar ciclo rápido",
@@ -129,21 +118,10 @@
   ],
   "goals": [
     {
-      "id": 1,
-      "title": "Aprender Vue",
-      "description": "Completar el curso de Vue.js",
-      "priority": "ALTA",
-      "status": "PENDIENTE",
-      "due_date": "2025-07-01",
-      "reminder_time": "2025-06-30T18:00:00",
-      "category": "ESTUDIO",
-      "user_id": 1
-    },
-    {
-      "id": 2,
+      "id": "2",
       "title": "Hacer ejercicio",
       "description": "Ir al gimnasio 3 veces por semana",
-      "priority": "MEDIA",
+      "priority": "ALTA",
       "status": "EN PROGRESO",
       "due_date": "2025-07-15",
       "reminder_time": "2025-07-14T19:00:00",
@@ -151,7 +129,7 @@
       "user_id": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Leer un libro",
       "description": "Terminar de leer 'Clean Code'",
       "priority": "BAJA",
@@ -162,7 +140,7 @@
       "user_id": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Organizar escritorio",
       "description": "Limpiar y organizar el espacio de trabajo",
       "priority": "MEDIA",
@@ -173,7 +151,7 @@
       "user_id": 2
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Aprender inglés",
       "description": "Practicar inglés 30 minutos diarios",
       "priority": "ALTA",
@@ -184,7 +162,7 @@
       "user_id": 1
     },
     {
-      "id": 6,
+      "id": "6",
       "title": "Cocinar una receta nueva",
       "description": "Intentar una receta internacional",
       "priority": "BAJA",
@@ -195,7 +173,7 @@
       "user_id": 2
     },
     {
-      "id": 7,
+      "id": "7",
       "title": "Actualizar CV",
       "description": "Agregar últimos proyectos y experiencia",
       "priority": "MEDIA",
@@ -206,7 +184,7 @@
       "user_id": 1
     },
     {
-      "id": 8,
+      "id": "8",
       "title": "Visitar a la familia",
       "description": "Planear un viaje para visitar a los padres",
       "priority": "ALTA",
@@ -215,6 +193,14 @@
       "reminder_time": "2025-08-14T18:00:00",
       "category": "OTROS",
       "user_id": 2
+    },
+    {
+      "id": "4b13",
+      "title": "estudiar finales",
+      "description": "estudiar examenes",
+      "priority": "ALTA",
+      "status": "en proceso",
+      "category": "ESTUDIO"
     }
   ]
 }

@@ -24,8 +24,10 @@ export default {
     this.goalService = new GoalApiService();
     this.goalService.getAll().then(response => {
       let goals = response.data;
-      this.goals = goals.map((g) => Goal.toDisplayableGoal ? Goal.toDisplayableGoal(g) : g);
-      console.log('GOALS CARGADAS:', this.goals); // Depuración
+      // Convierte a un array plano si es Proxy/reactivo
+      const plainGoals = Array.isArray(goals) ? goals.map(g => ({ ...g })) : [];
+      this.goals = plainGoals.map((g) => Goal.toDisplayableGoal ? Goal.toDisplayableGoal(g) : g);
+      console.log('GOALS CARGADAS:', JSON.parse(JSON.stringify(this.goals))); // Depuración legible
     });
   },
   methods: {
@@ -42,7 +44,7 @@ export default {
       this.isVisible = true;
     },
     onEditItemEventHandler(item){
-      this.goal = item;
+      this.goal = { ...item };
       this.submitted = false;
       this.isEdit = true;
       this.isVisible = true;
@@ -111,7 +113,7 @@ export default {
 
 <template>
   <div>
-    <h2>¡Componente de metas montado!</h2>
+    <h2 class="goals-title">Gestión de Metas</h2>
     <data-manager
       :items="goals"
       :selected-items.sync="selectedGoals"
@@ -124,11 +126,20 @@ export default {
     <goal-item-create-and-edit-dialog
       :visible="isVisible"
       :item="goal"
-      @save-requested="onSavedEventHandler"
-      @cancel-requested="onCanceledEventHandler"
+      @saved="onSavedEventHandler"
+      @canceled="onCanceledEventHandler"
     />
   </div>
 </template>
 
 <style scoped>
+.goals-title {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
 </style>
