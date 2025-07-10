@@ -39,6 +39,17 @@
       "user_id": 1
     },
     {
+      "id": "3",
+      "title": "Comprar útiles",
+      "description": "Cuadernos y lápices para el colegio",
+      "priority": "BAJA",
+      "status": "COMPLETADA",
+      "due_date": "2025-05-10",
+      "reminder_time": "2025-05-09T17:00:00",
+      "category": "OTROS",
+      "user_id": 1
+    },
+    {
       "id": "4",
       "title": "Preparar presentación",
       "description": "PowerPoint para exposición de historia",
@@ -61,14 +72,14 @@
       "user_id": 1
     },
     {
-      "id": "6",
-      "title": "Leer capítulo del libro",
-      "description": "Capítulo 4 de 'Cien años de soledad'",
-      "priority": "MEDIA",
-      "status": "PENDIENTE",
-      "due_date": "2025-05-16",
-      "reminder_time": "2025-05-16T18:00:00",
-      "category": "ESTUDIO",
+      "id": "7",
+      "title": "Lavar ropa",
+      "description": "Usar ciclo rápido",
+      "priority": "BAJA",
+      "status": "COMPLETADA",
+      "due_date": "2025-05-10",
+      "reminder_time": "2025-05-10T09:00:00",
+      "category": "TAREAS DOMESTICAS",
       "user_id": 2
     },
     {
@@ -92,35 +103,104 @@
       "reminder_time": "2025-05-13T19:00:00",
       "category": "ESTUDIO",
       "user_id": 2
-    }
-  ],
-  "metas": [
-    {
-      "id": "1",
-      "title": "Leer 2 libros al mes",
-      "category": "Crecimiento Personal",
-      "status": "pendiente",
-      "priority": "alta"
     },
     {
+      "id": "10",
+      "title": "Organizar el escritorio",
+      "description": "Limpiar y archivar documentos",
+      "priority": "MEDIA",
+      "status": "COMPLETADA",
+      "due_date": "2025-05-11",
+      "reminder_time": "2025-05-11T15:00:00",
+      "category": "TAREAS DOMESTICAS",
+      "user_id": 2
+    }
+  ],
+  "goals": [
+    {
       "id": "2",
-      "title": "Hacer ejercicio 3 veces por semana",
-      "category": "Salud",
-      "status": "en_progreso",
-      "priority": "media"
+      "title": "Hacer ejercicio",
+      "description": "Ir al gimnasio 3 veces por semana",
+      "priority": "ALTA",
+      "status": "EN PROGRESO",
+      "due_date": "2025-07-15",
+      "reminder_time": "2025-07-14T19:00:00",
+      "category": "OTROS",
+      "user_id": 1
     },
     {
       "id": "3",
-      "title": "Reducir el uso del celular",
-      "category": "Productividad",
-      "status": "pendiente"
+      "title": "Leer un libro",
+      "description": "Terminar de leer 'Clean Code'",
+      "priority": "BAJA",
+      "status": "PENDIENTE",
+      "due_date": "2025-08-01",
+      "reminder_time": "2025-07-31T20:00:00",
+      "category": "ESTUDIO",
+      "user_id": 2
     },
     {
       "id": "4",
-      "title": "Dormir al menos 7 horas por día",
-      "category": "Salud Mental",
-      "status": "completada",
-      "priority": "baja"
+      "title": "Organizar escritorio",
+      "description": "Limpiar y organizar el espacio de trabajo",
+      "priority": "MEDIA",
+      "status": "COMPLETADA",
+      "due_date": "2025-06-10",
+      "reminder_time": "2025-06-09T10:00:00",
+      "category": "TAREAS DOMESTICAS",
+      "user_id": 2
+    },
+    {
+      "id": "5",
+      "title": "Aprender inglés",
+      "description": "Practicar inglés 30 minutos diarios",
+      "priority": "ALTA",
+      "status": "EN PROGRESO",
+      "due_date": "2025-12-31",
+      "reminder_time": "2025-12-30T18:00:00",
+      "category": "ESTUDIO",
+      "user_id": 1
+    },
+    {
+      "id": "6",
+      "title": "Cocinar una receta nueva",
+      "description": "Intentar una receta internacional",
+      "priority": "BAJA",
+      "status": "PENDIENTE",
+      "due_date": "2025-07-20",
+      "reminder_time": "2025-07-19T17:00:00",
+      "category": "OTROS",
+      "user_id": 2
+    },
+    {
+      "id": "7",
+      "title": "Actualizar CV",
+      "description": "Agregar últimos proyectos y experiencia",
+      "priority": "MEDIA",
+      "status": "PENDIENTE",
+      "due_date": "2025-07-05",
+      "reminder_time": "2025-07-04T21:00:00",
+      "category": "OTROS",
+      "user_id": 1
+    },
+    {
+      "id": "8",
+      "title": "Visitar a la familia",
+      "description": "Planear un viaje para visitar a los padres",
+      "priority": "ALTA",
+      "status": "PENDIENTE",
+      "due_date": "2025-08-15",
+      "reminder_time": "2025-08-14T18:00:00",
+      "category": "OTROS",
+      "user_id": 2
+    },
+    {
+      "id": "4b13",
+      "title": "estudiar finales",
+      "description": "estudiar examenes",
+      "priority": "ALTA",
+      "status": "en proceso",
+      "category": "ESTUDIO"
     }
   ]
 }

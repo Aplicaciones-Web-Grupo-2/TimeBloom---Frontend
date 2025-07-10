@@ -15,6 +15,7 @@ import {
     ToastService, Toolbar, StyleClass, Ripple
 } from "primevue";
 import router from "./router/index.js";
+import Dropdown from "primevue/dropdown";
 
 createApp(App)
     .use(PrimeVue, {
@@ -49,6 +50,7 @@ createApp(App)
     .component('pv-checkbox', Checkbox)
     .component('pv-rating', Rating)
     .component('pv-select',Select)
+    .component('pv-dropdown', Dropdown)
     .directive('styleclass', StyleClass)
     .directive('ripple', Ripple)
     .mount('#app')

@@ -56,10 +56,11 @@
 
 <script>
 import TaskManagement from "./tasks-management/pages/task-management.component.vue";
+import GoalManagementComponent from "./goals-management/pages/goal-management.component.vue";
 
 export default {
   name: 'app',
-  components: { TaskManagement },
+  components: { TaskManagement, GoalManagementComponent },
   data() {
     return {
       drawer: false,
@@ -67,7 +68,11 @@ export default {
         { label: 'User-Panel', to: '/home' },
         { label: 'Tasks', to: '/tasks' },
         { label: 'Pomodoro', to: '/pomodoro' },
-        { label: 'Advices', to: '/advices' }
+        { label: 'Advices', to: '/advices' },
+        { label: 'Misión del Día', to: '/daily-missions' },
+        { label: 'Goals', to: '/goals' },
+        { label: 'Statistics', to: '/statistics' },
+        { label: 'Settings', to: '/settings' }
       ]
     }
   },
