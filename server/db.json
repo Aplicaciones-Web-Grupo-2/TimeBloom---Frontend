@@ -39,17 +39,6 @@
       "user_id": 1
     },
     {
-      "id": "3",
-      "title": "Comprar útiles",
-      "description": "Cuadernos y lápices para el colegio",
-      "priority": "BAJA",
-      "status": "COMPLETADA",
-      "due_date": "2025-05-10",
-      "reminder_time": "2025-05-09T17:00:00",
-      "category": "OTROS",
-      "user_id": 1
-    },
-    {
       "id": "4",
       "title": "Preparar presentación",
       "description": "PowerPoint para exposición de historia",
@@ -83,17 +72,6 @@
       "user_id": 2
     },
     {
-      "id": "7",
-      "title": "Lavar ropa",
-      "description": "Usar ciclo rápido",
-      "priority": "BAJA",
-      "status": "COMPLETADA",
-      "due_date": "2025-05-10",
-      "reminder_time": "2025-05-10T09:00:00",
-      "category": "TAREAS DOMESTICAS",
-      "user_id": 2
-    },
-    {
       "id": "8",
       "title": "Pagar recibo de luz",
       "description": "Antes de la fecha límite",
@@ -113,17 +91,6 @@
       "due_date": "2025-05-14",
       "reminder_time": "2025-05-13T19:00:00",
       "category": "ESTUDIO",
-      "user_id": 2
-    },
-    {
-      "id": "10",
-      "title": "Organizar el escritorio",
-      "description": "Limpiar y archivar documentos",
-      "priority": "MEDIA",
-      "status": "COMPLETADA",
-      "due_date": "2025-05-11",
-      "reminder_time": "2025-05-11T15:00:00",
-      "category": "TAREAS DOMESTICAS",
       "user_id": 2
     }
   ],
