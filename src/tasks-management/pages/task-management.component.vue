@@ -3,6 +3,7 @@ import {Task} from "../model/task.entity.js";
 import {TasksApiService} from "../services/tasks-api.service.js";
 import DataManager from "../../shared/components/data-manager.component.vue";
 import TaskCreateAndEdit from "../components/task-create-and-edit.component.vue";
+import {TaskCategoriesApiService} from "../services/task-categories-api.service.js";
 
 export default {
   name: "task-management",
@@ -13,20 +14,37 @@ export default {
       tasks: [],
       task: {},
       selectedTasks: [],
-      statuses: [{label: 'Published', value: 'published'}, {label: 'Unpublished', value: 'unpublished'}],
+      statuses: [{label: 'In_progress', value: 'In_progress'}, {label: 'Completed', value: 'Completed'}],
       taskService: null,
       isVisible: false,
       isEdit: false,
+      categories:[],
       submitted: false
     }
   },
   created() {
     this.taskService = new TasksApiService();
+    this.taskCategoriesService = new TaskCategoriesApiService();
+
+
+    this.taskCategoriesService.getAll().then(response => {
+      this.categories = response.data.map(c => ({
+        label: c.name,
+        value: c.id
+      }));
+    });
+
+
+
+
 
     this.taskService.getAll().then(response => {
       console.log(response.data);
       let tasks = response.data;
-      this.tasks = tasks.map((t) => Task.toDisplayableTask(t));
+          this.tasks = tasks.map((t) => {
+            let displayable = Task.toDisplayableTask(t);
+            displayable.category = t.category.name;
+            return displayable;});
     });
 
   },
@@ -97,8 +115,9 @@ export default {
     },
 
     createTask(){
-      this.task = Task.fromDisplayableTask(this.task);
-      this.task.user_id = 2;
+      //this.task = Task.fromDisplayableTask(this.task);
+    //  this.task.user_id = 2;
+      console.log(this.task);
       this.taskService.create(this.task).
           then((response) => {
             this.task = Task.toDisplayableTask(response.data);
@@ -109,6 +128,7 @@ export default {
 
     updateTask(){
       this.task = Task.fromDisplayableTask(this.task);
+      console.log(this.task);
       this.taskService.update(this.task.id,this.task).
           then((response) => {
             this.tasks[this.findIndexById(response.data.id)] = Task.toDisplayableTask(response.data);
@@ -175,6 +195,7 @@ export default {
 
     <task-create-and-edit
     :statuses="statuses"
+    :categories ="categories"
     :item="task"
     :edit="isEdit"
     :visible="isVisible"

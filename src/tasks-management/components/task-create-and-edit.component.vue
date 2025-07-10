@@ -7,20 +7,16 @@ export default {
   props:{
     item: null,
     visible: Boolean,
-    statuses: Array
+    statuses: Array,
+    categories:Array
   },
   data(){
     return{
       submitted: false,
       priorities: [
-        { label: 'Alta', value: 'ALTA' },
-        { label: 'Media', value: 'MEDIA' },
-        { label: 'Baja', value: 'BAJA' }
-      ],
-      categories: [
-        { label: 'Estudio', value: 'ESTUDIO' },
-        { label: 'Tareas Domésticas', value: 'TAREAS DOMESTICAS' },
-        { label: 'Otros', value: 'OTROS' }
+        { label: 'High', value: 'High' },
+        { label: 'Medium', value: 'Medium' },
+        { label: 'Low', value: 'Low' }
       ]
     }
   },
@@ -133,7 +129,7 @@ export default {
             <label for="category">Category</label>
             <pv-select
                 id="category"
-                v-model="item.category"
+                v-model="item.taskCategoryId"
                 :options="categories"
                 optionLabel="label"
                 optionValue="value"
