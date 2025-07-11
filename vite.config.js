@@ -1,13 +1,12 @@
-import { defineConfig } from 'vite';
-import vue from '@vitejs/plugin-vue';
-import path from 'path';  // ✅ Necesario para que path.resolve funcione
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
 export default defineConfig({
-  base: '/TimeBloom---Frontend/',  // ✅ Solo si lo estás desplegando en GitHub Pages o subcarpeta
+  // Para producción sirve directamente desde la raíz:
+  base: './',
   plugins: [vue()],
   resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    }
+    alias: { '@': path.resolve(__dirname, './src') }
   }
-});
+})
