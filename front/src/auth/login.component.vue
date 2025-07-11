@@ -4,7 +4,7 @@
       <h2>Iniciar Sesión</h2>
       <input v-model="email" type="email" placeholder="Correo electrónico" />
       <input v-model="password" type="password" placeholder="Contraseña" />
-      <button @click="login">Entrar</button>
+      <button @click="doLogin">Entrar</button>
       <p class="auth-footer">
         ¿No tienes cuenta?
         <router-link to="/register">Regístrate</router-link>
@@ -13,31 +13,32 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { loginUser } from '@/auth/services/api-auth.service'
+<script>
+import { loginUser } from '../shared/services/auth.service';
 
-const email = ref('')
-const password = ref('')
-const router = useRouter()
-
-const login = async () => {
-  try {
-    const user = await loginUser(email.value, password.value)
-    
-    // Guardar en localStorage para activar las rutas privadas
-    localStorage.setItem('currentUser', JSON.stringify(user))
-
-    // Redirigir al panel principal
-    router.push('/home')
-  } catch (err) {
-    alert('Correo o contraseña inválidos')
+export default {
+  name: 'LoginComponent',
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    doLogin() {
+      try {
+        loginUser(this.email, this.password);
+        this.$router.push('/home');
+      } catch (e) {
+        alert(e.message);
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
+/* mismo estilo que RegisterComponent */
 .auth-container {
   display: flex;
   height: 100vh;
@@ -85,4 +86,3 @@ const login = async () => {
   color: #00d1ff;
 }
 </style>
-

@@ -1,38 +1,54 @@
 <template>
   <div class="auth-container">
     <div class="auth-box">
-      <h2>Iniciar Sesión</h2>
+      <h2>Registro</h2>
+      <input v-model="name" type="text" placeholder="Nombre" />
       <input v-model="email" type="email" placeholder="Correo electrónico" />
       <input v-model="password" type="password" placeholder="Contraseña" />
-      <button @click="login">Entrar</button>
+      <input v-model="confirm" type="password" placeholder="Repetir contraseña" />
+      <button @click="doRegister">Crear cuenta</button>
       <p class="auth-footer">
-        ¿No tienes cuenta?
-        <router-link to="/register">Regístrate</router-link>
+        ¿Ya tienes cuenta?
+        <router-link to="/login">Inicia sesión</router-link>
       </p>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { loginUser } from '@/auth/services/api-auth.service'
+<script>
+import { registerUser } from '../shared/services/auth.service.js';
 
-const email = ref('')
-const password = ref('')
-const router = useRouter()
-
-const login = async () => {
-  try {
-    const user = await loginUser(email.value, password.value)
-    
-    // Guardar en localStorage para activar las rutas privadas
-    localStorage.setItem('currentUser', JSON.stringify(user))
-
-    // Redirigir al panel principal
-    router.push('/home')
-  } catch (err) {
-    alert('Correo o contraseña inválidos')
+export default {
+  name: 'RegisterComponent',
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      confirm: '',
+      error: ''
+    };
+  },
+  methods: {
+    doRegister() {
+      if (!this.name || !this.email || !this.password) {
+        return alert('Completa todos los campos');
+      }
+      if (this.password !== this.confirm) {
+        return alert('Las contraseñas no coinciden');
+      }
+      try {
+        registerUser({
+          name: this.name,
+          email: this.email,
+          password: this.password
+        });
+        alert('Registro exitoso. Ya puedes iniciar sesión');
+        this.$router.push('/login');
+      } catch (e) {
+        alert(e.message);
+      }
+    }
   }
 }
 </script>
@@ -85,4 +101,3 @@ const login = async () => {
   color: #00d1ff;
 }
 </style>
-

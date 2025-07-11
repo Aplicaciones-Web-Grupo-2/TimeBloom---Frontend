@@ -6,7 +6,7 @@
       <input v-model="email" type="email" placeholder="Correo electrónico" />
       <input v-model="password" type="password" placeholder="Contraseña" />
       <input v-model="confirm" type="password" placeholder="Repetir contraseña" />
-      <button @click="doRegister">Crear cuenta</button>
+      <button @click="doRegister">CREAR CUENTA</button>
       <p class="auth-footer">
         ¿Ya tienes cuenta?
         <router-link to="/login">Inicia sesión</router-link>
@@ -15,42 +15,42 @@
   </div>
 </template>
 
-<script>
-import { registerUser } from '../shared/services/auth.service.js';
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { registerUser } from '@/auth/services/api-auth.service';
 
-export default {
-  name: 'RegisterComponent',
-  data() {
-    return {
-      name: '',
-      email: '',
-      password: '',
-      confirm: '',
-      error: ''
-    };
-  },
-  methods: {
-    doRegister() {
-      if (!this.name || !this.email || !this.password) {
-        return alert('Completa todos los campos');
-      }
-      if (this.password !== this.confirm) {
-        return alert('Las contraseñas no coinciden');
-      }
-      try {
-        registerUser({
-          name: this.name,
-          email: this.email,
-          password: this.password
-        });
-        alert('Registro exitoso. Ya puedes iniciar sesión');
-        this.$router.push('/login');
-      } catch (e) {
-        alert(e.message);
-      }
-    }
+const router = useRouter();
+
+const name = ref('');
+const email = ref('');
+const password = ref('');
+const confirm = ref('');
+
+const doRegister = async () => {
+  if (!name.value || !email.value || !password.value || !confirm.value) {
+    alert('Por favor, completa todos los campos');
+    return;
   }
-}
+
+  if (password.value !== confirm.value) {
+    alert('Las contraseñas no coinciden');
+    return;
+  }
+
+  try {
+    await registerUser({
+      name: name.value, // solo si tu backend espera el campo `name`
+      email: email.value,
+      password: password.value
+    });
+
+    alert('Cuenta creada con éxito');
+    router.push('/login');
+  } catch (err) {
+    alert(err.response?.data?.message || 'Error al registrar');
+  }
+};
 </script>
 
 <style scoped>
@@ -83,6 +83,9 @@ export default {
   background: #ffffff15;
   color: #fff;
 }
+.auth-box input::placeholder {
+  color: #bbb;
+}
 .auth-box button {
   width: 100%;
   padding: 0.8rem;
@@ -92,6 +95,10 @@ export default {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s;
+}
+.auth-box button:hover {
+  background: #00b8e6;
 }
 .auth-footer {
   margin-top: 1rem;
@@ -99,5 +106,6 @@ export default {
 }
 .auth-footer a {
   color: #00d1ff;
+  text-decoration: underline;
 }
 </style>
